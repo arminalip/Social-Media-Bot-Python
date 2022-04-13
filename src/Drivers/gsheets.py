@@ -1,9 +1,9 @@
 """Module to interact with Google Sheets."""
-
 from __future__ import print_function
 import pickle
 import os.path
-from googleapiclient.discovery import built
+import googleapiclient.discovery
+#from googleapiclient.discovery import built
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
@@ -20,7 +20,7 @@ class GSheet():
         self.SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
         self.POST_CONTENT_SHEET_ID = POST_CONTENT_SHEET_ID
         self.MAIN_RANGE = 'Main!A2:S'
-        self.SOCIAL_MEDIA_COLUMNS = SOCIAL_MEDIAL_COLUMNS
+        self.SOCIAL_MEDIA_COLUMNS = SOCIAL_MEDIA_COLUMNS
 
     def buildService(self):
         """Returns a servoce from Google Sheets."""
@@ -31,19 +31,19 @@ class GSheet():
 
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
-            if creds and reds.expired and creds.refresh_token:
+            if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
 
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    '/Users/Armin/Desktop/social-media-marketing-bot/src/Secrets/client_secrets.json', self.SCOPES
+                    '/Users/Armin/Desktop/social-media-marketing-bot/src/Secrets/client_secret.json', self.SCOPES
                     )
                 creds = flow.run_local_server(port=0)
                 # Save the credentials for the next run
                 with open('token.pickle','wb') as token:
                     pickle.dump(creds, token)
 
-        self.service = build('sheets', 'v4', credentials=creds)
+        self.service = googleapiclient.discovery.build('sheets', 'v4', credentials=creds)
         self.sheet = self.service.soreadsheets()
         print('Building a service to Google Sheets.')
 

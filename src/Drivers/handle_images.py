@@ -9,6 +9,14 @@ from handle_pixabay import Pixabay
 from my_secrets import post_size_guide
 from PIL import Image
 
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+from time import sleep
+
 class HandleImage:
     """Class for handling images."""
     def __init__(self):
@@ -46,3 +54,5 @@ class HandleImage:
             print(f'Resizing {self.image_filename} from {image_width} x {image_height} to {new_width} x {new_height}')
             resized_image = original_image.resize((new_width, new_height))
             resized_image.save(self.image_filename)
+
+

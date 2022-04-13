@@ -30,7 +30,7 @@ class Pexels:
         original_image = requests.get(self.download_url).content
         os.chdir('/Users/Armin/Desktop/social-media-marketing-bot/src/Images/')
         image_filename = f'image-{self.image_id}.jpg'
-        with open(f'{image_filename}', 'wb') ad image_download:
+        with open(f'{image_filename}', 'wb') as image_download:
             image_download.write(original_image)
             image_download.close()
         print(f'Image saved')

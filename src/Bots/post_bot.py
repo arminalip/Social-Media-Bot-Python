@@ -11,10 +11,10 @@ from handle_images import HandleImage
 from my_secrets import max_character_limit
 
 # Social media platforms to target
-social_media_account = ['instagram']
+social_media_accounts = ['facebook']
 
 #Launch the bot
-if __name__='__main__':
+if __name__=='__main__':
     print(f'Launchin Social Media Marketing Bot')
     print(f'Version: "Post Bot"')
     gsheet = GSheet()
